@@ -12,6 +12,7 @@ function Form() {
   const [submittedData, setSubmittedData] = useState(null);
   const [visitorLogs, setVisitorLogs] = useState([]);
   const [activeTab, setActiveTab] = useState('form');
+  const [menuOpen, setMenuOpen] = useState(false);
 
   // Load visitor logs from localStorage on mount
   useEffect(() => {
@@ -60,6 +61,7 @@ function Form() {
     
     // Switch to confirmation tab
     setActiveTab('confirmation');
+    setMenuOpen(false);
   };
 
   // Get icon based on purpose
@@ -73,21 +75,77 @@ function Form() {
     }
   };
 
+  // Handle tab changes
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    setMenuOpen(false);
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-indigo-100 flex flex-col items-center p-6">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-indigo-100 flex flex-col items-center p-4 md:p-6">
+      {/* Main Container - Responsive width */}
       <div className="w-full max-w-4xl">
-        <div className="flex items-center justify-center mb-8">
-          <div className="bg-blue-600 text-white p-3 rounded-full mr-3">
+        {/* Header - Stack on mobile */}
+        <div className="flex flex-col md:flex-row items-center justify-center mb-6 md:mb-8">
+          <div className="bg-blue-600 text-white p-3 rounded-full mb-4 md:mb-0 md:mr-3">
             <UserCheck size={24} />
           </div>
-          <h1 className="text-3xl font-bold text-gray-800">Visitor Registration</h1>
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-800 text-center md:text-left">Visitor Registration</h1>
         </div>
 
         <div className="bg-white rounded-xl shadow-xl overflow-hidden">
-          {/* Tabs */}
-          <div className="flex border-b">
+          {/* Mobile Menu */}
+          <div className="md:hidden border-b">
+            <div className="flex items-center justify-between p-4">
+              <div className="font-medium text-gray-800">
+                {activeTab === 'form' && 'Registration Form'}
+                {activeTab === 'history' && 'Visitor History'}
+                {activeTab === 'confirmation' && 'Confirmation'}
+              </div>
+              <button 
+                onClick={() => setMenuOpen(!menuOpen)}
+                className="text-gray-500 focus:outline-none"
+              >
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  {menuOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
+            </div>
+            
+            {menuOpen && (
+              <div className="border-t">
+                <button 
+                  onClick={() => handleTabChange('form')}
+                  className={`block w-full text-left py-3 px-4 ${activeTab === 'form' ? 'bg-blue-50 text-blue-600' : 'text-gray-700'}`}
+                >
+                  Registration Form
+                </button>
+                <button 
+                  onClick={() => handleTabChange('history')}
+                  className={`block w-full text-left py-3 px-4 ${activeTab === 'history' ? 'bg-blue-50 text-blue-600' : 'text-gray-700'}`}
+                >
+                  Visitor History
+                </button>
+                {submittedData && (
+                  <button 
+                    onClick={() => handleTabChange('confirmation')}
+                    className={`block w-full text-left py-3 px-4 ${activeTab === 'confirmation' ? 'bg-blue-50 text-blue-600' : 'text-gray-700'}`}
+                  >
+                    Confirmation
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Desktop Tabs */}
+          <div className="hidden md:flex border-b">
             <button 
-              onClick={() => setActiveTab('form')}
+              onClick={() => handleTabChange('form')}
               className={`flex-1 py-4 px-6 font-medium ${activeTab === 'form' 
                 ? 'text-blue-600 border-b-2 border-blue-600' 
                 : 'text-gray-500 hover:text-blue-500'}`}
@@ -95,7 +153,7 @@ function Form() {
               Registration Form
             </button>
             <button 
-              onClick={() => setActiveTab('history')}
+              onClick={() => handleTabChange('history')}
               className={`flex-1 py-4 px-6 font-medium ${activeTab === 'history' 
                 ? 'text-blue-600 border-b-2 border-blue-600' 
                 : 'text-gray-500 hover:text-blue-500'}`}
@@ -104,7 +162,7 @@ function Form() {
             </button>
             {submittedData && (
               <button 
-                onClick={() => setActiveTab('confirmation')}
+                onClick={() => handleTabChange('confirmation')}
                 className={`flex-1 py-4 px-6 font-medium ${activeTab === 'confirmation' 
                   ? 'text-blue-600 border-b-2 border-blue-600' 
                   : 'text-gray-500 hover:text-blue-500'}`}
@@ -116,7 +174,7 @@ function Form() {
 
           {/* Form Tab */}
           {activeTab === 'form' && (
-            <div className="p-8">
+            <div className="p-4 md:p-8">
               <form onSubmit={handleSubmit}>
                 <div className="mb-6">
                   <label className="flex items-center mb-2 text-gray-700 font-medium">
@@ -214,57 +272,57 @@ function Form() {
 
           {/* Confirmation Tab */}
           {activeTab === 'confirmation' && submittedData && (
-            <div className="p-8">
-              <div className="bg-green-50 border border-green-200 rounded-lg p-6 text-center mb-6">
-                <div className="bg-green-100 h-16 w-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="p-4 md:p-8">
+              <div className="bg-green-50 border border-green-200 rounded-lg p-4 md:p-6 text-center mb-6">
+                <div className="bg-green-100 h-12 w-12 md:h-16 md:w-16 rounded-full flex items-center justify-center mx-auto mb-3 md:mb-4">
+                  <svg className="h-6 w-6 md:h-8 md:w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <h2 className="text-xl font-semibold text-green-800 mb-2">Registration Successful!</h2>
-                <p className="text-green-700">The visitor has been registered successfully.</p>
+                <h2 className="text-lg md:text-xl font-semibold text-green-800 mb-2">Registration Successful!</h2>
+                <p className="text-green-700 text-sm md:text-base">The visitor has been registered successfully.</p>
               </div>
               
-              <div className="bg-gray-50 rounded-lg p-6">
-                <h3 className="text-lg font-medium text-gray-800 mb-4 flex items-center">
-                  <Clock size={20} className="mr-2 text-blue-500" />
+              <div className="bg-gray-50 rounded-lg p-4 md:p-6">
+                <h3 className="text-md md:text-lg font-medium text-gray-800 mb-4 flex items-center">
+                  <Clock size={18} className="mr-2 text-blue-500" />
                   Registration Details
                 </h3>
                 
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="bg-white p-4 rounded-lg border border-gray-200">
-                    <p className="text-sm text-gray-500 mb-1">Visitor Name</p>
-                    <p className="font-medium">{submittedData.fullName}</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+                  <div className="bg-white p-3 md:p-4 rounded-lg border border-gray-200">
+                    <p className="text-xs md:text-sm text-gray-500 mb-1">Visitor Name</p>
+                    <p className="font-medium text-sm md:text-base">{submittedData.fullName}</p>
                   </div>
                   
-                  <div className="bg-white p-4 rounded-lg border border-gray-200">
-                    <p className="text-sm text-gray-500 mb-1">Flat Number</p>
-                    <p className="font-medium">{submittedData.flatNumber}</p>
+                  <div className="bg-white p-3 md:p-4 rounded-lg border border-gray-200">
+                    <p className="text-xs md:text-sm text-gray-500 mb-1">Flat Number</p>
+                    <p className="font-medium text-sm md:text-base">{submittedData.flatNumber}</p>
                   </div>
                   
-                  <div className="bg-white p-4 rounded-lg border border-gray-200">
-                    <p className="text-sm text-gray-500 mb-1">Purpose of Visit</p>
-                    <p className="font-medium flex items-center">
+                  <div className="bg-white p-3 md:p-4 rounded-lg border border-gray-200">
+                    <p className="text-xs md:text-sm text-gray-500 mb-1">Purpose of Visit</p>
+                    <p className="font-medium flex items-center text-sm md:text-base">
                       {getPurposeIcon(submittedData.purpose)}
                       <span className="ml-2">{submittedData.purpose}</span>
                     </p>
                   </div>
                   
-                  <div className="bg-white p-4 rounded-lg border border-gray-200">
-                    <p className="text-sm text-gray-500 mb-1">Mobile Number</p>
-                    <p className="font-medium">{submittedData.mobile}</p>
+                  <div className="bg-white p-3 md:p-4 rounded-lg border border-gray-200">
+                    <p className="text-xs md:text-sm text-gray-500 mb-1">Mobile Number</p>
+                    <p className="font-medium text-sm md:text-base">{submittedData.mobile}</p>
                   </div>
                   
-                  <div className="bg-white p-4 rounded-lg border border-gray-200 md:col-span-2">
-                    <p className="text-sm text-gray-500 mb-1">Registration Time</p>
-                    <p className="font-medium">{submittedData.timestamp}</p>
+                  <div className="bg-white p-3 md:p-4 rounded-lg border border-gray-200 col-span-1 md:col-span-2">
+                    <p className="text-xs md:text-sm text-gray-500 mb-1">Registration Time</p>
+                    <p className="font-medium text-sm md:text-base">{submittedData.timestamp}</p>
                   </div>
                 </div>
                 
-                <div className="mt-6 flex justify-center">
+                <div className="mt-4 md:mt-6 flex justify-center">
                   <button 
-                    onClick={() => setActiveTab('form')}
-                    className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                    onClick={() => handleTabChange('form')}
+                    className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-200 text-sm md:text-base"
                   >
                     Register Another Visitor
                   </button>
@@ -275,53 +333,59 @@ function Form() {
 
           {/* History Tab */}
           {activeTab === 'history' && (
-            <div className="p-6">
-              <h2 className="text-xl font-semibold mb-4 flex items-center">
-                <Clock size={20} className="mr-2 text-blue-500" />
+            <div className="p-4 md:p-6">
+              <h2 className="text-lg md:text-xl font-semibold mb-4 flex items-center">
+                <Clock size={18} className="mr-2 text-blue-500" />
                 Visitor History
               </h2>
               
               {visitorLogs.length === 0 ? (
-                <div className="text-center py-10 bg-gray-50 rounded-lg">
-                  <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="text-center py-8 md:py-10 bg-gray-50 rounded-lg">
+                  <svg className="mx-auto h-10 w-10 md:h-12 md:w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <p className="mt-2 text-gray-500">No visitor records found</p>
+                  <p className="mt-2 text-gray-500 text-sm md:text-base">No visitor records found</p>
                 </div>
               ) : (
-                <div className="overflow-x-auto">
-                  <table className="w-full bg-white rounded-lg shadow-sm">
-                    <thead>
-                      <tr className="bg-gray-100">
-                        <th className="py-3 px-4 text-left font-medium text-gray-600">Name</th>
-                        <th className="py-3 px-4 text-left font-medium text-gray-600">Flat</th>
-                        <th className="py-3 px-4 text-left font-medium text-gray-600">Purpose</th>
-                        <th className="py-3 px-4 text-left font-medium text-gray-600">Mobile</th>
-                        <th className="py-3 px-4 text-left font-medium text-gray-600">Time</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {visitorLogs.map((log, index) => (
-                        <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                          <td className="py-3 px-4 border-t">{log.fullName}</td>
-                          <td className="py-3 px-4 border-t">{log.flatNumber}</td>
-                          <td className="py-3 px-4 border-t flex items-center">
-                            {getPurposeIcon(log.purpose)}
-                            <span className="ml-2">{log.purpose}</span>
-                          </td>
-                          <td className="py-3 px-4 border-t">{log.mobile}</td>
-                          <td className="py-3 px-4 border-t text-gray-500 text-sm">{log.timestamp}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                <div className="overflow-x-auto -mx-4 md:mx-0">
+                  <div className="inline-block min-w-full align-middle">
+                    <div className="overflow-hidden border border-gray-200 md:rounded-lg">
+                      <table className="min-w-full divide-y divide-gray-200">
+                        <thead className="bg-gray-100">
+                          <tr>
+                            <th scope="col" className="py-3 px-3 md:px-4 text-left text-xs md:text-sm font-medium text-gray-600">Name</th>
+                            <th scope="col" className="py-3 px-3 md:px-4 text-left text-xs md:text-sm font-medium text-gray-600">Flat</th>
+                            <th scope="col" className="py-3 px-3 md:px-4 text-left text-xs md:text-sm font-medium text-gray-600">Purpose</th>
+                            <th scope="col" className="py-3 px-3 md:px-4 text-left text-xs md:text-sm font-medium text-gray-600">Mobile</th>
+                            <th scope="col" className="py-3 px-3 md:px-4 text-left text-xs md:text-sm font-medium text-gray-600">Time</th>
+                          </tr>
+                        </thead>
+                        <tbody className="bg-white divide-y divide-gray-200">
+                          {visitorLogs.map((log, index) => (
+                            <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                              <td className="py-3 px-3 md:px-4 text-xs md:text-sm">{log.fullName}</td>
+                              <td className="py-3 px-3 md:px-4 text-xs md:text-sm">{log.flatNumber}</td>
+                              <td className="py-3 px-3 md:px-4">
+                                <div className="flex items-center text-xs md:text-sm">
+                                  {getPurposeIcon(log.purpose)}
+                                  <span className="ml-2">{log.purpose}</span>
+                                </div>
+                              </td>
+                              <td className="py-3 px-3 md:px-4 text-xs md:text-sm">{log.mobile}</td>
+                              <td className="py-3 px-3 md:px-4 text-xs md:text-sm text-gray-500">{log.timestamp}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
           )}
         </div>
         
-        <div className="mt-6 text-center text-gray-500 text-sm">
+        <div className="mt-4 md:mt-6 text-center text-gray-500 text-xs md:text-sm">
           © {new Date().getFullYear()} Building Management System
         </div>
       </div>

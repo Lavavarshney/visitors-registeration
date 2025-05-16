@@ -1,28 +1,36 @@
-Visitor Registration App
+# Visitor Registration App
 
-A React-based web application for registering society visitors, built with Vite and styled with Tailwind CSS. The app allows users to submit visitor details (name, flat number, purpose, mobile number), validates input, stores logs in localStorage, and displays submission history. Icons from lucide-react enhance the UI, and the app is optimized for development and production with Vite's fast build system.
-Features
+A React-based web application for registering society visitors, built with Vite and styled with Tailwind CSS. The app allows users to submit visitor details (name, flat number, purpose, mobile number), validates input, stores logs in `localStorage`, and displays submission history with a tabbed interface. Icons from `lucide-react` enhance the UI, and the app is optimized for development and production with Vite's fast build system.
 
-Form Submission:
-Fields: Full Name, Flat Number, Purpose of Visit (dropdown: Delivery, Guest, Maintenance, Other), Mobile Number.
-Client-side validation for 10-digit mobile numbers.
-Form resets after submission.
+## Features
 
+- **Form Submission**:
+  - Fields: Full Name, Flat Number, Purpose of Visit (dropdown: Delivery, Guest, Maintenance, Other), Mobile Number.
+  - Client-side validation for 10-digit mobile numbers.
+  - Form resets after submission.
+- **Tabbed Interface**:
+  - **Registration Form**: Input visitor details.
+  - **Confirmation**: Displays the last submitted entry with icons for purpose (e.g., `MoreHorizontal` for Other).
+  - **History**: Shows all past submissions in a table, stored in `localStorage`.
+- **Responsive Design**: Styled with Tailwind CSS for a modern, mobile-friendly UI.
+- **Icons**: Uses `lucide-react` for purpose-specific icons (e.g., `Package` for Delivery).
+- **Persistent Storage**: Visitor logs persist across sessions via `localStorage`.
+- **Fast Development**: Vite with Hot Module Replacement (HMR) for quick feedback.
+- **Linting**: ESLint with React Hooks and React Refresh plugins for code quality.
 
+## Prerequisites
 
+- **Node.js**: Version 18 or higher.
+- **npm**: Version 8 or higher (included with Node.js).
+- **Git**: For cloning the repository.
 
-Responsive Design: Styled with Tailwind CSS for a modern, mobile-friendly UI.
-Icons: Uses lucide-react for purpose-specific icons (e.g., Package for Delivery).
-Persistent Storage: Visitor logs persist across sessions via localStorage.
-Fast Development: Vite with Hot Module Replacement (HMR) for quick feedback.
-Linting: ESLint with React Hooks and React Refresh plugins for code quality.
+## Installation
 
+1. **Clone the Repository**:
 
-Installation
-
-Clone the Repository:
-git clone https://github.com/Lavavarshney/visitors-registeration
-cd visitor-registration
+   ```bash
+   git clone https://github.com/Lavavarshney/visitors-registeration
+   cd visitor-registration
 
 
 Install Dependencies:
@@ -71,7 +79,10 @@ Runs ESLint to check code quality, using rules from eslint.config.js.
 
 Usage
 
-Access the App:Open http://localhost:5173 after running npm run dev.
+Access the App:
+
+Open http://localhost:5173 after running npm run dev.
+
 
 Register a Visitor:
 
@@ -100,10 +111,12 @@ Entries persist in localStorage and remain across browser sessions.
 
 Clear Logs (Optional):
 
-To clear visitor logs, run in the browser console:localStorage.removeItem('visitorLogs');
+To clear visitor logs, run in the browser console:
+localStorage.removeItem('visitorLogs');
 
 
 Refresh the page to update the History tab.
+
 
 
 
@@ -127,20 +140,18 @@ visitor-registration/
 
 Dependencies
 From package.json:
+Core
 
-Core:
 react, react-dom: React 19 for building the UI.
 lucide-react: Icon library for purpose icons.
 tailwindcss, @tailwindcss/vite, @tailwindcss/postcss: Styling and Vite integration.
 
+Dev Dependencies
 
-Dev Dependencies:
 vite, @vitejs/plugin-react: Build tool and React plugin.
 eslint, eslint-plugin-react-hooks, eslint-plugin-react-refresh: Linting and code quality.
 @types/react, @types/react-dom: TypeScript types (optional, for TypeScript users).
 globals: Browser globals for ESLint.
-
-
 
 Deployment
 GitHub
@@ -163,7 +174,7 @@ Vercel
 Import Repository:
 
 Go to vercel.com, sign in, and click New Project.
-Import your GitHub repository (gargprachi343/visitor-registration).
+Import your GitHub repository (Lavavarshney/visitors-registeration).
 
 
 Configure:
@@ -184,28 +195,35 @@ Auto-deploys on new commits to the main branch.
 Troubleshooting
 
 Form Validation Errors:
+
 Ensure mobile number is exactly 10 digits. Non-numeric input or incorrect length triggers an error.
 
 
 Icons Not Displaying:
+
 Verify lucide-react is installed (npm install lucide-react).
 Check getPurposeIcon in Form.jsx for correct icon mappings.
 
 
 Tailwind CSS Not Applying:
+
 Confirm @tailwindcss/vite is in vite.config.js.
 Ensure src/index.css imports tailwindcss and is included in main.jsx.
 Run npm run dev to rebuild styles.
 
 
 Vite Errors:
+
 If App.css errors persist, ensure no stray imports exist (removed in this setup).
 Check postcss.config.js for correct Tailwind and Autoprefixer setup.
 
 
 Linting Issues:
+
 Run npm run lint to identify ESLint errors.
 Fix or ignore specific rules in eslint.config.js if needed.
+
+
 
 Credits
 
@@ -221,4 +239,4 @@ Deployment: Hosted on Vercel.
 
 License
 This project is open-source under the MIT License. Feel free to use, modify, and distribute as needed.
-© 2025 Building Management System
+© 2025 Building Management System```
