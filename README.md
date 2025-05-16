@@ -24,7 +24,62 @@ A React-based web application for registering society visitors, built with Vite 
 - **npm**: Version 8 or higher (included with Node.js).
 - **Git**: For cloning the repository.
 
-  ## Project Structure
+## Installation
+
+1. **Clone the Repository**:
+
+   ```bash
+   git clone https://github.com/Lavavarshney/visitors-registeration
+   cd visitor-registration
+   ```
+
+
+  2. **Install Dependencies**:
+
+    ```bash
+    npm install
+    ```
+
+  3. **Running the App**:
+  
+    ```bash
+     npm run dev
+    ```
+
+
+
+Usage
+
+Access the App:
+
+Open http://localhost:5173 after running npm run dev.
+
+
+
+1. **Fill in the form**:
+
+
+
+2. **Click Register Visitor**.
+
+
+
+3. **View Confirmation**:
+
+
+
+4. **Check History**:
+
+
+
+5. **Clear Logs (Optional)**:
+
+
+
+
+
+
+## Project Structure
 ```
 visitor-registration/
 ├── public/
@@ -48,79 +103,7 @@ visitor-registration/
 
 
 
-## Installation
 
-1. **Clone the Repository**:
-
-   ```bash
-   git clone https://github.com/Lavavarshney/visitors-registeration
-   cd visitor-registration
-   ```
-
-
-  2. **Install Dependencies**:
-    ```bash
-    npm install
-    ```
-
-  3. **Running the App**
-    ```bash
-     npm run dev
-    ```
-
-
-
-Usage
-
-Access the App:
-
-Open http://localhost:5173 after running npm run dev.
-
-
-
-1.**Fill in the form**:
-Full Name: Any text (required).
-Flat Number: Any text (e.g., A-101, required).
-Purpose of Visit: Select from Delivery, Guest, Maintenance, or Other.
-Mobile Number: Must be exactly 10 digits.
-
-
-2.**Click Register Visitor**.
-The form resets, and the Confirmation tab shows the submitted details with an icon for the purpose.
-
-
-3.**View Confirmation**:
-
-The Confirmation tab displays the last submission, including name, flat number, purpose (with icon), mobile, and timestamp.
-Click Register Another Visitor to return to the form.
-
-
-4.**Check History**:
-
-Switch to the History tab to see all past submissions in a table.
-Entries persist in localStorage and remain across browser sessions.
-
-
-5.**Clear Logs (Optional)**:
-
-To clear visitor logs, run in the browser console:
-localStorage.removeItem('visitorLogs');
-
-
-Refresh the page to update the History tab.
-
-
-## Credits
-
-Built By: Lavanya Varshney
-Tools:
-Vite: Build tool.
-React: UI library.
-Tailwind CSS: Styling framework.
-Lucide React: Icon library.
-
-
-Deployment: Hosted on Vercel.
 
 ## License
 This project is open-source under the MIT License. Feel free to use, modify, and distribute as needed.
