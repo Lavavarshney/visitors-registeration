@@ -1,65 +1,127 @@
 # Visitor Registration App
 
-A **React-based** web application for registering society visitors. Built with **Vite** and styled using **Tailwind CSS**, the app allows users to submit visitor details, validates inputs, stores logs in `localStorage`, and displays submission history through a clean **tabbed interface**. Icons from `lucide-react` are used for visual clarity.
-
----
-
-## Table of Contents
-
-1. [Features](#features)  
-2. [Prerequisites](#prerequisites)  
-3. [Installation](#installation)  
-4. [Usage](#usage)  
-5. [Project Structure](#project-structure)  
-6. [Dependencies](#dependencies)  
-7. [Deployment](#deployment)  
-8. [Troubleshooting](#troubleshooting)  
-9. [Credits](#credits)  
-10. [License](#license)  
-
----
+A React-based web application for registering society visitors, built with Vite and styled with Tailwind CSS. The app allows users to submit visitor details (name, flat number, purpose, mobile number), validates input, stores logs in `localStorage`, and displays submission history with a tabbed interface. Icons from `lucide-react` enhance the UI, and the app is optimized for development and production with Vite's fast build system.
 
 ## Features
 
-- **Form Submission**  
-  - Fields: Full Name, Flat Number, Purpose (Delivery, Guest, Maintenance, Other), Mobile Number  
-  - Client-side validation (e.g., 10-digit mobile number)  
-  - Auto-reset form after submission  
-
-- **Tabbed Interface**  
-  - **Registration**: Enter visitor information  
-  - **Confirmation**: View the most recent entry (with icon and timestamp)  
-  - **History**: See all past entries in a persistent table  
-
-- **Persistent Storage**  
-  - Visitor entries are saved using `localStorage` and persist across sessions  
-
-- **Responsive Design**  
-  - Optimized for mobile and desktop using **Tailwind CSS**
-
-- **Icons**  
-  - Purpose-based icons using `lucide-react` (e.g., `Package`, `User`, `Wrench`)
-
-- **Fast Development**  
-  - Built with **Vite** for fast build and HMR (Hot Module Replacement)
-
-- **Code Quality**  
-  - Linting setup with ESLint, React Hooks, and Refresh plugins
-
----
+- **Form Submission**:
+  - Fields: Full Name, Flat Number, Purpose of Visit (dropdown: Delivery, Guest, Maintenance, Other), Mobile Number.
+  - Client-side validation for 10-digit mobile numbers.
+  - Form resets after submission.
+- **Tabbed Interface**:
+  - **Registration Form**: Input visitor details.
+  - **Confirmation**: Displays the last submitted entry with icons for purpose (e.g., `MoreHorizontal` for Other).
+  - **History**: Shows all past submissions in a table, stored in `localStorage`.
+- **Responsive Design**: Styled with Tailwind CSS for a modern, mobile-friendly UI.
+- **Icons**: Uses `lucide-react` for purpose-specific icons (e.g., `Package` for Delivery).
+- **Persistent Storage**: Visitor logs persist across sessions via `localStorage`.
+- **Fast Development**: Vite with Hot Module Replacement (HMR) for quick feedback.
+- **Linting**: ESLint with React Hooks and React Refresh plugins for code quality.
 
 ## Prerequisites
 
-- **Node.js**: v18+  
-- **npm**: v8+  
-- **Git**: For cloning the repository
+- **Node.js**: Version 18 or higher.
+- **npm**: Version 8 or higher (included with Node.js).
+- **Git**: For cloning the repository.
 
----
+  ## Project Structure
+```
+visitor-registration/
+├── public/
+│   └── vite.svg           # Vite favicon
+├── src/
+│   ├── App.jsx            # Main app component, renders Form
+│   ├── Form.jsx           # Visitor registration form component
+│   ├── index.css          # Tailwind CSS directives
+│   └── main.jsx           # React entry point
+├── .gitignore             # Git ignore rules
+├── eslint.config.js       # ESLint configuration
+├── index.html             # HTML entry point
+├── package.json           # Project metadata and dependencies
+├── postcss.config.js      # PostCSS configuration for Tailwind
+├── README.md              # This file
+├── tailwind.config.js     # Tailwind CSS configuration
+└── vite.config.js         # Vite configuration
+```
+
+
+
+
 
 ## Installation
 
-### 1. Clone the Repository
+1. **Clone the Repository**:
 
-```bash
-git clone https://github.com/Lavavarshney/visitors-registeration
-cd visitor-registration
+   ```bash
+   git clone https://github.com/Lavavarshney/visitors-registeration
+   cd visitor-registration
+   ```
+
+
+  2. **Install Dependencies**:
+    ```bash
+    npm install
+    ```
+
+  3. **Running the App**
+    ```bash
+     npm run dev
+    ```
+
+
+
+Usage
+
+Access the App:
+
+Open http://localhost:5173 after running npm run dev.
+
+
+
+1.**Fill in the form**:
+Full Name: Any text (required).
+Flat Number: Any text (e.g., A-101, required).
+Purpose of Visit: Select from Delivery, Guest, Maintenance, or Other.
+Mobile Number: Must be exactly 10 digits.
+
+
+2.**Click Register Visitor**.
+The form resets, and the Confirmation tab shows the submitted details with an icon for the purpose.
+
+
+3.**View Confirmation**:
+
+The Confirmation tab displays the last submission, including name, flat number, purpose (with icon), mobile, and timestamp.
+Click Register Another Visitor to return to the form.
+
+
+4.**Check History**:
+
+Switch to the History tab to see all past submissions in a table.
+Entries persist in localStorage and remain across browser sessions.
+
+
+5.**Clear Logs (Optional)**:
+
+To clear visitor logs, run in the browser console:
+localStorage.removeItem('visitorLogs');
+
+
+Refresh the page to update the History tab.
+
+
+## Credits
+
+Built By: Lavanya Varshney
+Tools:
+Vite: Build tool.
+React: UI library.
+Tailwind CSS: Styling framework.
+Lucide React: Icon library.
+
+
+Deployment: Hosted on Vercel.
+
+## License
+This project is open-source under the MIT License. Feel free to use, modify, and distribute as needed.
+© 2025 Building Management System
