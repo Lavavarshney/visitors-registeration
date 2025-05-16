@@ -28,23 +28,26 @@ A React-based web application for registering society visitors, built with Vite 
 
 1. **Clone the Repository**:
 
-   ```bash
-   git clone https://github.com/Lavavarshney/visitors-registeration
-   cd visitor-registration
-   ```
+    ```bash
+    git clone https://github.com/Lavavarshney/visitors-registeration
+    cd visitor-registration
+    ```
 
-
-  2. **Install Dependencies**:
+2. **Install Dependencies**:
 
     ```bash
+
     npm install
-    ```
 
-  3. **Running the App**:
-  
+     ```
+
+3. **Running the App**:
+
     ```bash
-     npm run dev
-    ```
+
+    npm run dev
+
+     ```
 
 
 
@@ -56,23 +59,23 @@ Open http://localhost:5173 after running npm run dev.
 
 
 
-1. **Fill in the form**:
+1. **Fill in the form**
 
 
 
-2. **Click Register Visitor**.
+2. **Click Register Visitor**
 
 
 
-3. **View Confirmation**:
+3. **View Confirmation**
 
 
 
-4. **Check History**:
+4. **Check History**
 
 
 
-5. **Clear Logs (Optional)**:
+5. **Clear Logs (Optional)**
 
 
 
