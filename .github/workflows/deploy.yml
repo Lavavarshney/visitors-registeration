@@ -1,0 +1,23 @@
+name: Deploy to Docker Hub
+
+on:
+  push:
+    branches:
+      - main  # or master
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout Code
+        uses: actions/checkout@v3
+
+      - name: 🔐 Login to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: 🏗️ Build Docker Image
+        run: docker build -t ${{ secrets.IMAGE_NAME }} .
+
+      - name: 📤 Push to Docker Hub
+        run: docker push ${{ secrets.IMAGE_NAME }}
