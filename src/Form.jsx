@@ -58,7 +58,7 @@ function Form() {
     // Reset form
     setFormData({ fullName: '', flatNumber: '', purpose: 'Delivery', mobile: '' });
     setErrors({});
-    
+    console.log("hello");
     // Switch to confirmation tab
     setActiveTab('confirmation');
     setMenuOpen(false);
