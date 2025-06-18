@@ -1,23 +1,32 @@
-# Use an official Node.js runtime as a base image
-FROM node:18
+# Use official Node.js image to build the app
+FROM node:18 AS builder
 
 # Set working directory
 WORKDIR /app
 
-# Copy package files
+# Copy package files and install dependencies
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install
 
-# Copy rest of the app
+# Copy rest of the app and build
 COPY . .
-
-# Build the app for production
 RUN npm run build
 
-# Expose port (if app runs on 3000)
+# --- Production Stage ---
+FROM node:18 AS production
+
+# Set working directory
+WORKDIR /app
+
+# Copy only the dist folder and necessary files
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/package*.json ./
+
+# Install only production dependencies (if needed)
+RUN npm install --production
+
+# Expose the port vite preview uses
 EXPOSE 3000
 
-# Start the app
-CMD ["npm", "start"]
+# Serve the built app using vite preview
+CMD ["npx", "vite", "preview", "--host", "--port", "3000"]

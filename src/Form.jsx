@@ -54,7 +54,7 @@ function Form() {
     setVisitorLogs(updatedLogs);
     localStorage.setItem('visitorLogs', JSON.stringify(updatedLogs));
     setSubmittedData(newLog);
-
+    console.log("hello"); 
     // Reset form
     setFormData({ fullName: '', flatNumber: '', purpose: 'Delivery', mobile: '' });
     setErrors({});
