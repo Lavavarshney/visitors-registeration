@@ -88,7 +88,7 @@ function Form() {
         {/* Header - Stack on mobile */}
         <div className="flex flex-col md:flex-row items-center justify-center mb-6 md:mb-8">
           <div className="bg-blue-600 text-white p-3 rounded-full mb-4 md:mb-0 md:mr-3">
-            <UserCheck size={24} />
+            <UserCheck size={25} />
           </div>
           <h1 className="text-2xl md:text-3xl font-bold text-gray-800 text-center md:text-left">Visitor Registration</h1>
         </div>
